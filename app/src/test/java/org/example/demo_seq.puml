@@ -1,0 +1,34 @@
+- titre: String
++ {static} this(titre: String, chapitres: List<Chapitre>)
++ titre(): String
++ taille(): int
+}
+class Chapitre implements Document {
+- titre: String
+- pages: String[*]
++ {static} this(titre: String, pages: String[*])
++ titre(): String
++ taille(): int
+}
+Mémoire *--> "- cs *" Chapitre
+@enduml
+6. visualiser le modèle et le sauvegarder au format png.
+7. implémenter le diagramme de classe
+8. créer un diagramme de séquence avec PlantUML
+@!include ../commons.style
+@startuml dseq_example
+participant "mémoireAlice: Mémoire" as mA
+participant "ci: Chapitre" as ci
+[-> mA: taille()
+activate mA
+mA -> mA : t = 0
+loop ci in cs
+mA -> ci: taille()
+activate ci
+mA <-- ci: ti
+deactivate ci
+mA -> mA : t = t + ti
+end
+[<-- mA: t
+deactivate mA
+@endum
